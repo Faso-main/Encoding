@@ -56,9 +56,9 @@ def encode_message_to_image(message, output_path=img_path, img_size=(100, 100)):
     
     img = Image.fromarray(pixels)
     
-    img = img.filter(ImageFilter.GaussianBlur(radius=0.7))
+    img = img.convert('1', dither=Image.FLOYDSTEINBERG)
     
-    img = ImageOps.autocontrast(img, cutoff=2)
+    img = img.convert('L')
     
     img.save(output_path)
     print(f"Закодировано в {output_path}")
@@ -66,6 +66,7 @@ def encode_message_to_image(message, output_path=img_path, img_size=(100, 100)):
 
 def decode_message_from_image(image_path=img_path):
     img = Image.open(image_path)
+    img = img.convert('L')
     pixels = np.array(img).flatten()
     
     pixels = [1 if p < 128 else 0 for p in pixels]
