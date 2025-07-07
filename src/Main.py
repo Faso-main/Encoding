@@ -2,7 +2,7 @@ from PIL import Image
 import numpy as np
 import os
 
-img_path = os.path.join('PIL', 'itr1.png')
+img_path = os.path.join('src', 'itr1.png')
 
 def text_to_bits(text):
     bits = []
